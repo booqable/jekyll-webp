@@ -99,7 +99,7 @@ module Jekyll
                 # Keep the webp file from being cleaned by Jekyll
                 site.static_files << WebpFile.new(site,
                                                   site.dest,
-                                                  File.join(imgdir, imgfile_relative_path),
+                                                  File.join(("#{@config['img_dest']}/" || imgdir), imgfile_relative_path),
                                                   outfile_filename)
               end
           end # dir.foreach
