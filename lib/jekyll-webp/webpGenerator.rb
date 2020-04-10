@@ -57,7 +57,7 @@ module Jekyll
         # if one has not been created already for that image.
         for imgdir in @config['img_dir']
           imgdir_source = File.join(site.source, imgdir)
-          imgdir_destination = File.join(site.dest, imgdir)
+          imgdir_destination = File.join(site.dest, "#{@config['img_dest']}/" || imgdir)
           FileUtils::mkdir_p(imgdir_destination)
           Jekyll.logger.info "WebP:","Processing #{imgdir_source}"
 
