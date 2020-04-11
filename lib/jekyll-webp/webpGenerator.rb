@@ -74,10 +74,20 @@ module Jekyll
               # TODO: Do an exclude check
 
               # Create the output file path
+              original_file_name = File.basename(imgfile)
+              original_filen_name_regex = original_file_name.split('.').join("-.{64}.").gsub('jpeg', 'jpg')
+              files = Dir["#{imgdir_destination}#{imgfile_relative_path}/*"]
+
+              compiled_file = files.select do |file|
+                file.scan(/.*#{original_filen_name_regex}/).length > 0
+              end.sort.last
+
+              next if compiled_file.nil?
+
               outfile_filename = if @config['append_ext']
-                File.basename(imgfile) + '.webp'
+                File.basename(compiled_file) + '.webp'
               else
-                file_noext = File.basename(imgfile, file_ext)
+                file_noext = File.basename(compiled_file, file_ext)
                 file_noext + ".webp"
               end
               FileUtils::mkdir_p(imgdir_destination + imgfile_relative_path)
