@@ -79,7 +79,7 @@ module Jekyll
               files = Dir["#{imgdir_destination}#{imgfile_relative_path}/*"]
 
               compiled_file = files.select do |file|
-                file.scan(/.*#{original_filen_name_regex}/).length > 0
+                file.scan(/.*#{original_filen_name_regex}$/).length > 0
               end.sort.last
 
               next if compiled_file.nil?
